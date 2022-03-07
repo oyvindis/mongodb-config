@@ -1,0 +1,37 @@
+name: Deploy
+
+on:
+  pull_request:
+    types: [ready_for_review, opened, reopened, synchronize]
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy to environment when pull request is created
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set K8s context
+        id: setcontext
+        uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+      - uses: azure/k8s-bake@v2
+        with:
+          renderEngine: "helm"
+          helmChart: "./helm-sources/"
+          helm-version: "latest"
+        id: bake
+
+      - name: Deploy to Kubernetes cluster
+        uses: Azure/k8s-deploy@v1.4
+        with:
+          manifests: ${{ steps.bake.outputs.manifestsBundle }}
+          kubectl-version: 'latest'
+          namespace: 'dev'

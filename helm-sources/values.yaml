@@ -1,0 +1,11 @@
+# Default values for MongoDB.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+NAMESPACE: dev
+
+##mongodb
+MONGODB_MEMORY: "500Mi"
+MONGODB_IMAGE: "mongo:4.4.10"
+
+MONGODB_VOLUMENAME_DB: dev-mongodb-db
+MONGODB_STORAGESIZE_DB: "500M"

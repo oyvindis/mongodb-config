@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  mongodb:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2020-10-14T11:07:13.424635692+02:00"
+    description: Config for MongoDB
+    digest: b8df68bc75c8b5b91ea6382daaea19360e989d8890cc49e79a75217a4b356110
+    home: https://github.com/oyvindis/mongodb-config
+    name: mongodb
+    urls:
+    - https://github.com/oyvindis/mongodb-config/mongodb-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-10-14T11:07:13.42346002+02:00"
